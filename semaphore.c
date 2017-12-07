@@ -39,7 +39,7 @@ void semaphore_create(int value) {
         exit(1);
     }
     
-    printf("Sucessfully created semaphore with initial value of %d.\n", value);
+    printf("Sucessfully created semaphore with initial value of %d. ID: %d\n", value, semid);
 }
 
 void semaphore_view_value() {
