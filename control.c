@@ -1,3 +1,10 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+#include "semaphore.h"
+
 void print_usage_and_exit() {
   fprintf(stderr,
 	  "Usage: control [-c N | -v | -r ]\n"
@@ -17,7 +24,12 @@ int main(int argc, char** argv) {
     if (argc == 2) {
       print_usage_and_exit();
     }
-    char* n_text = argv[2];
+    char* value_text = argv[2];
+    int value;
+    if (sscanf(value_text, "%d", &value) != 1) {
+      print_usage_and_exit();
+    }
+    semaphore_create(value);
   } else if (strncmp(opt, "-v", 2) == 0) {
     semaphore_view_value();
   } else if (strncmp(opt, "-r", 2) == 0) {
